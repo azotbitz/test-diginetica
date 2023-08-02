@@ -1,36 +1,11 @@
 <script>
 import product from "../../assets/img/ic_baseline-photo-camera.png"
+import sale from "../../assets/img/Shields.png"
+import heat from '../../assets/img/BA.png'
 export default {
   data: () => ({
-    range: [5500, 5500],
-    select:'Popularity',
-    options: [
-      'Default',
-      'Popularity',
-      'Relevance',
-      'Price: Low to High',
-      'Price: High to Low',
-    ],
-    page:1,
-    breadcrums: [
-      {
-        text: 'Home',
-        disabled: false,
-        href: 'breadcrumbs_home',
-      },
-      {
-        text: 'Clothing',
-        disabled: false,
-        href: 'breadcrumbs_clothing',
-      },
-      {
-        text: 'T-Shirts',
-        disabled: true,
-        href: 'breadcrumbs_shirts',
-      },
-    ],
-    min:5500,
-    max:5500,
+    heat: heat,
+    sale: sale,
     items: [
       { type: 'subheader', title: 'Название категории #1' },
       {
@@ -48,85 +23,73 @@ export default {
     products:[
       {
         id:1,
-        name:'BLACK TEE',
         type: "Бренд",
-        price:'18.00',
+        price:'5990₽',
         src: product
       },
       {
         id:2,
-        name:'WHITE TEE',
         type:"Бренд",
-        price:'40.00',
+        price:'5990₽',
         src: product
       },
       {
         id:3,
-        name:'Zara limited...',
         type:"Бренд",
-        price:'25.00',
+        price:'5990₽',
         src: product
       },
       {
         id:4,
-        name:'SKULL TEE',
         type:"Бренд",
-        price:'30.00',
+        price:'5990₽',
         src: product
       },
       {
         id:5,
-        name:'MANGO WINTER',
         type:"Бренд",
-        price:'50.00',
+        price:'5990₽',
         src: product
       },
       {
         id:6,
-        name:'SHIRT',
         type:"Бренд",
-        price:'34.00',
+        price:'5990₽',
         src: product
       },
       {
         id:7,
-        name:'TRUCKER JACKET',
         type:"Бренд",
-        price:'38.00',
+        price:'5990₽',
         src: product
       },
       {
         id:8,
-        name:'COATS',
         type:"Бренд",
-        price:'25.00',
+        price:'5990₽',
         src: product
       },{
         id:9,
-        name:'MANGO WINTER',
         type:"Бренд",
-        price:'50.00',
+        price:'5990₽',
         src: product
       },
       {
         id:10,
-        name:'SHIRT',
         type:"Бренд",
-        price:'34.00',
+        price:'5990₽',
         src: product
       },
       {
         id:11,
-        name:'TRUCKER JACKET',
         type:"Бренд",
-        price:'38.00',
+        price:'5990₽',
         src: product
       },
       {
         id:12,
-        name:'COATS',
         type:"Бренд",
-        price:'25.00',
+        price:'5990₽',
         src: product
       }
     ]
@@ -138,7 +101,7 @@ export default {
     <div class="container">
       <div class="row">
         <div
-         class="col-md-2 col-sm-3 col-xs-12"
+         class="filters col-md-2 col-sm-3 col-xs-12"
         >
         <v-card>
               <v-list
@@ -147,18 +110,23 @@ export default {
 
             <v-divider></v-divider>
             <v-card-title>Цена</v-card-title>
-            <v-range-slider
-              v-model="range"
-              :height="10"
-              class="align-center"
-            ></v-range-slider>
+          <div class="price-range">
+            <input class="price-input" type="text" value="от 5 500 ₽"/>
+            <input class="price-input" type="text" value="до 5 500 ₽"/>
+          </div>
             <v-divider></v-divider>
           <div class="my-brand">
             <v-card-title class="pb-0">Бренд</v-card-title>
-            <button style="background-color: white">Очистить</button>
+            <button style="background-color: white;
+            border: none;
+            color: #AAAAAA;
+            text-decoration: underline;">Очистить</button>
           </div>
           <div class="my-search">
-            <input style="width: 100%" type="search" placeholder="Поиск">
+            <input style="width: 100%;
+            border-radius: 4px;
+            border: 1px solid #D5D5D5;
+            background: #FFF;" type="search" value="Поиск">
           </div>
             <v-container class="pt-0" fluid="true">
               <v-checkbox checked label="Атрибут" hide-details dense></v-checkbox>
@@ -181,25 +149,37 @@ export default {
             </v-container>
 
         </div>
+
+        <div class="drawer-filter">
+          <v-divider></v-divider>
+          <h4>Название категории</h4>
+        </div>
+
         <div
           class="col-md-10 col-sm-9 col-xs-12"
         >
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12" :key="pro.id" v-for="pro in products">
+            <div class="my-product col-md-3 col-sm-6 col-xs-6" :key="pro.id" v-for="pro in products">
               <div class="image-layer">
+                <img class="hot" alt="hot_price" :src="heat"/>
                   <img class="image-product" alt="product"
                     :src="pro.src"
                   />
+                <img class="sale-badge" alt="sale" :src="sale"/>
               </div>
-              <v-card-text style="padding-bottom: 16px; padding-top: 16px" class="brands">
+              <v-card-text style="margin-bottom: 16px; margin-top: 16px" class="brands">
               <div class="brand-s">{{pro.type}}</div>
                 <span class="my-prop">
                 Полное название товара в несколько строк для вида с обрывом в конце...</span>
             </v-card-text>
-                    <v-card-title style="justify-content: flex-start; padding-left: 14px">{{pro.price}} </v-card-title>
-              <div style="margin-top: 25px;
-                          margin-left: 14px;">
-              <v-btn href="#" style="padding: 16px;
+              <div style="display: flex">
+                    <v-card-title class="price">{{pro.price}}</v-card-title>
+                <span style="margin-left: 10px;
+                color: #aaa;
+                text-decoration: line-through;">5 990 ₽</span>
+              </div>
+              <div class="buy">
+              <v-btn href="#" style="padding: 10px;
               border-radius: 4px;
               border: 1px solid #7397F5;
               background: #FFF" outlined>Купить</v-btn>
